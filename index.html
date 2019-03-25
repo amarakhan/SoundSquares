@@ -49,6 +49,7 @@
         }
 
         document.addEventListener("mousedown", getCoords);
+        document.addEventListener("touchend", getCoords);
 
         function onFrame(event) {
             for(var s=0; s<squares.length; s++){
