@@ -49,7 +49,14 @@
         }
 
         document.addEventListener("mousedown", getCoords);
-        document.addEventListener("touchend", getCoords);
+
+        function getMobileCords(event){
+            document.addEventListener('touchstart', function(e) { 
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+              }, false);
+              drawRect(clientX,clientY);
+        }
 
         function onFrame(event) {
             for(var s=0; s<squares.length; s++){
