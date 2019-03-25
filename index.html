@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sound Squares</title>
+    <!-- my css files -->
+    <link rel="stylesheet" href="css/main.css">
+    <!-- including google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <!-- including paper js lib -->
+    <script type="text/javascript" src="js/paper-full.js"></script>
+    <!-- including howler js lib  -->
+    <!-- <script src="/Users/amarakhan/Documents/Web-Dev-Bootcamp/SoundSquares/howler/src/howler.core.js"></script> -->
+    <script src="js/howler.core.js"></script>
+    <!-- my js files -->
+    <script type="text/paperscript" canvas="myCanvas"> 
+
+        var x = 0;
+        var y = 0;
+
+        var squares = [];
+        var sounds = ['sounds/veil.mp3','sounds/bubbles.mp3','sounds/squiggle.mp3','sounds/confetti.mp3','sounds/clay.mp3','sounds/ufo.mp3','sounds/corona.mp3','sounds/splits.mp3','sounds/timer.mp3','sounds/wipe.mp3'];
+
+        function getCoords(event) {
+            x = event.clientX;
+            y = event.clientY;
+            drawRect(x,y);
+        }
+
+        function drawRect(x,y){
+            var c = '#'+Math.floor(Math.random()*16777215).toString(16);
+            var soundPicker = Math.floor(Math.random()*10);
+            console.log(soundPicker);
+            var rectSize = Math.floor(Math.random() * 9) + 2;
+            rectSize = 10 * rectSize;
+            var path = new Path.Rectangle({
+                point: [x,y],
+                size: [rectSize, rectSize],
+                strokeColor: c,
+                fillColor: c
+            });;
+            squares.push(path);
+            var sound = new Howl({
+                src: sounds[soundPicker]
+                });
+            sound.play();
+        }
+
+        document.addEventListener("click", getCoords);
+
+        function onFrame(event) {
+            for(var s=0; s<squares.length; s++){
+                squares[s].rotate(1);
+            }
+    
+        }
+    </script>
+    <script type="text/javascript">
+        function refresh(){
+            location.reload(); 
+        }
+    </script>
+</head>
+<body onResize="refresh()"> 
+    <h4>SOUND SQUARES</h4>
+    <canvas id="myCanvas">
+    </canvas>
+</body>
+</html>
