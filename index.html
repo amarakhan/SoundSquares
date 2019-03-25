@@ -19,11 +19,10 @@
 
         var x = 0;
         var y = 0;
-        var clientX = 0;
-        var clientY = 0;
 
         var squares = [];
         var sounds = ['sounds/veil.mp3','sounds/bubbles.mp3','sounds/squiggle.mp3','sounds/confetti.mp3','sounds/clay.mp3','sounds/ufo.mp3','sounds/corona.mp3','sounds/splits.mp3','sounds/timer.mp3','sounds/wipe.mp3'];
+
 
         function getCoords(event) {
             x = event.clientX;
@@ -51,20 +50,15 @@
         }
 
         document.addEventListener("mousedown", getCoords);
-        document.addEventListener("touchend", getMobileCoords);
-
-        function getMobileCords(event){ 
-                clientX = event.touches[0].clientX;
-                clientY = event.touches[0].clientY;
-              drawRect(clientX,clientY);
-        }
 
         function onFrame(event) {
             for(var s=0; s<squares.length; s++){
                 squares[s].rotate(1);
             }
-    
         }
+
+    
+
     </script>
     <script type="text/javascript">
         function refresh(){
